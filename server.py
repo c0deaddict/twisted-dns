@@ -27,11 +27,12 @@ class HostAliasesResolver(object):
         print(self.hosts)
 
     def query(self, query, timeout=None):
+        print(query)
         if query.type == dns.A:
             alias = query.name.name.decode()
-            print(alias)
             target = self.hosts.get(alias)
             if target is not None:
+                print('{} --> {}'.format(alias, target))
                 return self.respond(alias, target)
 
         return self.resolver.query(query, timeout)
